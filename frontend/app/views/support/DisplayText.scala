@@ -1,6 +1,6 @@
 package views.support
 
-import com.gu.membership.model.GBP
+import com.gu.i18n.GBP
 import com.gu.membership.salesforce.Tier
 import com.gu.membership.salesforce.Tier._
 import configuration.Config.zuoraFreeEventTicketsAllowance
