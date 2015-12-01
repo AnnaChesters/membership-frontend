@@ -63,7 +63,7 @@
                    @* Salesforce accepts up to 255 chars but this field gets concatenated with address line 2 *@
                    maxlength="126"
                    class="input-text js-address-line-one"
-                   @if(!addressRequired){required aria-required="true"} />
+                   @if(addressRequired){required aria-required="true"} />
             @fragments.form.errorMessage(s"Please enter your ${heading.toLowerCase()} first line")
         </div>
 
