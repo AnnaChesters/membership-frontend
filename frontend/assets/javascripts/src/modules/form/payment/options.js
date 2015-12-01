@@ -3,6 +3,7 @@ define(['$', 'bean'], function ($, bean) {
 
     var CURRENCY_ATTR = 'data-currency';
     var DATA_CURRENCY_SEL = '[' + CURRENCY_ATTR + ']';
+    var BILLING_PERIOD_CONTAINER_EL = '.js-billing-period__container' + DATA_CURRENCY_SEL;
     var PAYMENT_OPTIONS_CONTAINER_EL = $('.js-payment-options-container')[0];
     var CARD_DETAILS_NOTE_EL = $('.js-card-details-note')[0];
     var CARD_NOTE_CURRENCIES_ELS = $(DATA_CURRENCY_SEL, CARD_DETAILS_NOTE_EL);
@@ -52,10 +53,9 @@ define(['$', 'bean'], function ($, bean) {
     }
 
     function renderPaymentOptions(currency, billingPeriod) {
-        console.info('renderPaymentOpts', arguments);
-        toArray($(DATA_CURRENCY_SEL, PAYMENT_OPTIONS_CONTAINER_EL)).forEach(function (el) {
+        toArray($(BILLING_PERIOD_CONTAINER_EL, PAYMENT_OPTIONS_CONTAINER_EL)).forEach(function (el) {
             toggleCurrency(currency, el);
-            setBillingPeriod(el, billingPeriod);
+            setBillingPeriod(el, billingPeriod, currency);
         });
     }
 
@@ -85,14 +85,15 @@ define(['$', 'bean'], function ($, bean) {
         });
     }
 
-    function setBillingPeriod(el, billingPeriod) {
+    function setBillingPeriod(el, billingPeriod, currency) {
         toArray(el.querySelectorAll('input[type="radio"]')).forEach(function (inputEl) {
-            var elBillingPeriod = $(inputEl).val();
-            if (elBillingPeriod === billingPeriod) {
-                inputEl.setAttribute('checked', 'checked');
+            var elBillingPeriod = inputEl.value;
+            var elCurrency = inputEl.getAttribute(CURRENCY_ATTR);
+            if (elBillingPeriod === billingPeriod && elCurrency === currency) {
+                inputEl.checked = true;
             }
             else {
-                inputEl.removeAttribute('checked');
+                inputEl.checked = false;
             }
         });
     }
@@ -135,7 +136,7 @@ define(['$', 'bean'], function ($, bean) {
     }
 
     function toggleCurrency(currency, el) {
-        if ($(el).attr('data-currency') === currency) {
+        if ($(el).attr(CURRENCY_ATTR) === currency) {
             el.classList.remove('is-hidden');
         } else {
             el.classList.add('is-hidden');
