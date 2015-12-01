@@ -97,10 +97,6 @@ define(['$', 'bean'], function ($, bean) {
         });
     }
 
-    /**
-     *
-     *
-     */
     var init = function () {
         selectCountry(checkoutForm.defaultCountry, DELIVERY_ADDRESS_EL);
         selectCountry(checkoutForm.defaultCountry, BILLING_ADDRESS_EL);

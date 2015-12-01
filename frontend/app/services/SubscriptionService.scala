@@ -69,7 +69,7 @@ object SubscriptionService {
     if(items.isEmpty)
       items
     else {
-      val sortedItems = items.sortBy(_.serviceStartDate)
+      val sortedItems = items.sortBy(_.chargeNumber)
       sortedItems.filter(_.subscriptionId == sortedItems.last.subscriptionId)
     }
   }
@@ -82,8 +82,6 @@ object SubscriptionService {
     val versionsNumberBySubVersionId = subscriptions.map { sub => (sub.id, sub.version) }.toMap
     amendments.sortBy { amendment => versionsNumberBySubVersionId(amendment.subscriptionId) }
   }
-
-  def sortInvoiceItems(items: Seq[Soap.InvoiceItem]) = items.sortBy(_.chargeNumber)
 
   def sortPreviewInvoiceItems(items: Seq[Soap.PreviewInvoiceItem]) = items.sortBy(_.price)
 
