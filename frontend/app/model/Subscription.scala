@@ -52,10 +52,10 @@ trait Paid extends PaymentStatus[PaidTierPlan] { self: CommonSubscription =>
   def firstPaymentDate: LocalDate
   def chargedThroughDate: Option[LocalDate]
   override def features: Set[FeatureChoice]
-  override def userHasBeenInvoiced = false
+  override def userHasBeenInvoiced =
+    chargedThroughDate.nonEmpty || LocalDate.now().isAfter(firstPaymentDate.minusDays(1))
   override def isPaid = true
-  override def isInTrialPeriod =
-    chargedThroughDate.isEmpty && LocalDate.now().isBefore(firstPaymentDate)
+  override def isInTrialPeriod = !userHasBeenInvoiced
 }
 
 object Subscription {
