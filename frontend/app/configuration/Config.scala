@@ -173,8 +173,6 @@ object Config {
   val casServiceConfig = config.getString("cas.url")
   val zuoraFreeEventTicketsAllowance = config.getInt("zuora.free-event-tickets-allowance")
 
-  val productFamily = Membership.fromConfig(config)
-
-  def ratePlanIds(env: String) =
-    config.getConfig(s"touchpoint.backend.environments.$env.zuora.ratePlanIds")
+  def productFamily(env: String) = Membership.fromConfig(
+    config.getConfig(s"touchpoint.backend.environments.$env.zuora.ratePlanIds"))
 }
