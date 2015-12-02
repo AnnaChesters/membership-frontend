@@ -93,15 +93,11 @@
                           </tr>
                           <tr role="row">
                               <th role="rowheader">First payment</th>
-                              <td id="qa-upgrade-new-first-payment">@summary.target.firstPayment.pretty</td>
+                              <td id="qa-upgrade-new-first-payment">@summary.target.firstPayment.pretty <small>to be taken now</small></td>
                           </tr>
                           <tr role="row">
                               <th role="rowheader">@{summary.billingPeriod.adjective.capitalize} payment</th>
-                              <td id="qa-upgrade-new-recurring-payment">@summary.target.nextPayment.pretty</td>
-                          </tr>
-                          <tr role="row">
-                              <th role="rowheader">Next payment due</th>
-                              <td id="qa-upgrade-new-date">@prettyDate(summary.target.nextPaymentDate)</td>
+                              <td id="qa-upgrade-new-recurring-payment">@summary.target.nextPayment.pretty <small>next taken on date @summary.target.nextPaymentDate.pretty</small></td>
                           </tr>
                       </table>
                   </div>
