@@ -19,7 +19,7 @@ case class PageInfo(title: String = CopyConfig.copyTitleDefault,
 
 object PageInfo {
   case class FormI18n(defaultCountry: Option[Country],
-                      deliveryCurrency: Currency,
+                      currency: Currency,
                       billingPeriod: BillingPeriod)
 
   implicit val bpWrites = new Writes[BillingPeriod] {

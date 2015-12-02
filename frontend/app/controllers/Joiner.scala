@@ -95,9 +95,10 @@ trait Joiner extends Controller with ActivityTracking with LazyLogging {
     } yield {
       val cg = countryGroup
       val paidDetails = catalog.paidTierDetails(tier)
+      val currency = if (paidDetails.currencies.contains(cg.currency)) cg.currency else GBP
       val pageInfo = PageInfo(
         stripePublicKey = Some(request.touchpointBackend.stripeService.publicKey),
-        formI18n = FormI18n(cg.defaultCountry, cg.currency, Year)
+        formI18n = FormI18n(cg.defaultCountry, currency, Year)
       )
 
       Ok(views.html.joiner.form.payment(

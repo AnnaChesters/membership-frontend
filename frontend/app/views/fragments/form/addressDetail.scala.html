@@ -1,6 +1,5 @@
 @import com.gu.i18n.Country
 @import views.support.CountryWithCurrency
-
 @(countriesWithCurrencies: List[CountryWithCurrency],
   formType: String,
   address1: Option[String],
@@ -21,6 +20,7 @@
                 class="select js-@countyOrStateLabel"
                 required
                 aria-required="true">
+        <option>--</option>
         @for(countyOrState <- countyOrStateList) {
             <option value="@countyOrState"@if(county.getOrElse("") == countyOrState){ selected}>@countyOrState</option>
         }
@@ -45,6 +45,7 @@
                 class="select js-country"
                 required
                 aria-required="true">
+                <option>--</option>
                 @for(cc <- countriesWithCurrencies) {
                     <option value="@cc.country.alpha2"
                             data-currency="@cc.currency.toString">@cc.country.name</option>
