@@ -20,7 +20,6 @@
                 class="select js-@countyOrStateLabel"
                 required
                 aria-required="true">
-        <option>--</option>
         @for(countyOrState <- countyOrStateList) {
             <option value="@countyOrState"@if(county.getOrElse("") == countyOrState){ selected}>@countyOrState</option>
         }
@@ -45,7 +44,7 @@
                 class="select js-country"
                 required
                 aria-required="true">
-                <option>--</option>
+                <option value="">--</option>
                 @for(cc <- countriesWithCurrencies) {
                     <option value="@cc.country.alpha2"
                             data-currency="@cc.currency.toString">@cc.country.name</option>
