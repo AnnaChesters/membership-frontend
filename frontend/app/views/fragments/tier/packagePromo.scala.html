@@ -16,7 +16,7 @@
 @link(tier: Tier) = {
     @tier match {
         case paid: PaidTier => { @routes.Joiner.enterPaidDetails(paid) }
-        case _: FreeTier => { routes.Joiner.enterFreeDetails() }
+        case _: FreeTier => { @routes.Joiner.enterFriendDetails() }
     }
 }
 
