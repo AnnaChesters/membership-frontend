@@ -126,12 +126,14 @@ trait Joiner extends Controller with ActivityTracking with LazyLogging {
       (privateFields, marketingChoices, passwordExists) <- identityDetails(request.user, request)
       catalog <- request.catalog
     } yield {
+      val ukGroup = CountryGroup.UK
+      val formI18n = FormI18n(ukGroup.defaultCountry, ukGroup.currency, Year)
       Ok(views.html.joiner.form.friendSignup(
         catalog.friend,
         privateFields,
         marketingChoices,
         passwordExists,
-        support.PageInfo()))
+        support.PageInfo(formI18n = formI18n)))
     }
   }
 

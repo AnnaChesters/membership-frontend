@@ -17,6 +17,7 @@ define(['$', 'bean', 'src/modules/form/validation/display'], function ($, bean, 
     var USE_BILLING_ADDRESS_EL = $('#use-billing-address')[0];
     var USE_DELIVERY_ADDRESS_EL = $('#use-delivery-address')[0];
     var BILLING_CTA_SEL = $('.js-toggle-billing-address');
+    var FRIEND_FORM_EL = $('.js-friend-form')[0];
 
     var checkoutForm = guardian.membership.checkoutForm;
 
@@ -109,12 +110,17 @@ define(['$', 'bean', 'src/modules/form/validation/display'], function ($, bean, 
     }
 
     var init = function () {
-        checkoutForm.showBillingAddress = false;
         checkoutForm.deliveryCountry = checkoutForm.defaultCountry;
 
         if (PAYMENT_OPTIONS_CONTAINER_EL && checkoutForm) {
+            checkoutForm.showBillingAddress = false;
+            checkoutForm.billingCountry = checkoutForm.deliveryCountry;
             addListeners();
             renderPrices();
+        }
+
+        if (FRIEND_FORM_EL && checkoutForm) {
+            selectCountry(DELIVERY_COUNTRY_EL, checkoutForm.deliveryCountry);
         }
     };
 
